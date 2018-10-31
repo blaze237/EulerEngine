@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="extensions.cpp" />
     <ClCompile Include="hwTexture.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Input_Switching.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -133,6 +134,7 @@
     <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Input.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MathTools.h" />
     <ClInclude Include="SceneManager.h" />

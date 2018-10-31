@@ -115,6 +115,8 @@ void SceneManager::mainLoop()
 
 		}
 
+		
+
 		//Max number of visualy different renderable frames is set by the tick rate, therefore we sleep untill the next tick to avoid waisting resources rendering identical intermediate frames
 		long sleepTime = 1000 / FIXED_UPDATE_RATE + fStart - SDL_GetTicks();
 		SDL_Delay(sleepTime < 0 ? 0 : sleepTime);
@@ -128,15 +130,28 @@ void SceneManager::fixedUpdate(long tCurrent)
 	//First job is to check input
 	pollEvents();
 
+
 	//Next apply physics to awake objects in the scene
 	//Non rigidbody + colider => static colider, allways the same bounds
 	//Rididbody + collider => attempt to move, handle collisions that occur
 	//kinematic rigidbody => it can move freely through anything, but things will collide with it and not go through it
 	//Rigidbody + nocollidr => just gravity?
+
+
+
+
+
 }
 
 void SceneManager::update(long tCurrent)
 {
+
+	if (inputManager.keyHeld(SDLK_w))
+		std::cout << "w!";
+
+
+	//Tell the input manager to advance to polling for next frame. Must be last thing in update loop
+	inputManager.update();
 }
 
 void SceneManager::pollEvents()
@@ -152,22 +167,37 @@ void SceneManager::pollEvents()
 			quit = true;
 			break;
 		case SDL_KEYDOWN:
-			InputManager::handleKeyDown(e.key.keysym.sym);
+			inputManager.handleKeyDown(e.key.keysym.sym);
 			break;
 		case SDL_KEYUP:
-			InputManager::handleKeyUp(e.key.keysym.sym);
+			inputManager.handleKeyUp(e.key.keysym.sym);
 			break;
 		case SDL_MOUSEBUTTONDOWN:
-			InputManager::handleMouseKeyDown(e.button);
+			inputManager.handleMButtonDown(e.button);
 			break;
 		case SDL_MOUSEBUTTONUP:
-			InputManager::handleMouseKeyUp(e.button);
+			inputManager.handleMButtonUp(e.button);
 			break;
 		case SDL_MOUSEMOTION:
-			InputManager::handleMouseMove(e.motion);
+			inputManager.handleMouseMove(e.motion);
 			break;
 		case SDL_MOUSEWHEEL:
-			InputManager::handleMouseWheelEvent(e.wheel);
+			inputManager.handleMouseWheelEvent(e.wheel);
+			break;
+		case SDL_CONTROLLERAXISMOTION:
+
+			break;
+		case SDL_CONTROLLERBUTTONDOWN:
+
+			break;
+		case SDL_CONTROLLERBUTTONUP:
+
+			break;
+		case SDL_CONTROLLERDEVICEADDED:
+
+			break;
+		case SDL_CONTROLLERDEVICEREMOVED:
+
 			break;
 		default:
 				break;

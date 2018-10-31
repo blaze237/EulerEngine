@@ -1,13 +1,13 @@
 #pragma once
 
 #include <SDL.h>
+#include "InputManager.h"
 class SceneManager
 {
 public:
 	enum TEXTURE_SCALE_MODE {NEAREST_PIXEL, LINEAR, ANISOTROPIC};
 
 	
-
 	SceneManager();
 	~SceneManager();
 
@@ -23,6 +23,9 @@ private:
 	void pollEvents();
 	void render();
 	void cleanup();
+
+
+	InputManager& inputManager = InputManager::getInstance();
 
 	TEXTURE_SCALE_MODE textureScaleMode = LINEAR;
 	bool quit = false;
